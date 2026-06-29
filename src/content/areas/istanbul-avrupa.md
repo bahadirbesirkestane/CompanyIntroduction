@@ -1,10 +1,12 @@
 ---
-title: Istanbul Avrupa Yakasi
-summary: Esenyurt, Beylikduzu, Avcilar, Kucukcekmece ve cevre ilcelere yonelik hizmet akisi.
+title: Sakarya
+summary: Serdivan, Erenler, Adapazarı
 order: 1
 serviceAreaType: AdministrativeArea
+seo:
+  noindex: true
 ---
-Istanbul Avrupa Yakasi genelinde hizmet yogunlugu en cok Esenyurt, Beylikduzu, Avcilar, Kucukcekmece ve yakin cevrede toplanir.
+Sakarya genelinde hizmet yogunlugu en cok Esenyurt, Beylikduzu, Avcilar, Kucukcekmece ve yakin cevrede toplanir.
 
 Bolgeye gore hizmet suresi; trafik, hava kosullari ve mevcut is yogunluguna bagli olarak degisebilir.
 
