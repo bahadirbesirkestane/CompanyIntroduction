@@ -1,6 +1,6 @@
 ---
 title: Mutfak Gideri Mudahalesi
-image: /uploads/gider-acma-oncesi-sonrasi.jpg
+image: /uploads/hijyenik_tesisat_montaji.jpg
 alt: Mutfak gider hattinda yapilan mudahale sonrasi ornek calisma fotografi
 category: once-sonra
 order: 1
