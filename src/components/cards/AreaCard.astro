@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  area: CollectionEntry<"areas">;
+}
+
+const { area } = Astro.props;
+---
+
+<article class="surface-card rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40">
+  <p class="eyebrow-label">Hizmet Bolgesi</p>
+  <h3 class="mt-3 text-xl font-semibold text-[color:var(--text)]">{area.data.title}</h3>
+  <p class="body-muted mt-3 text-sm leading-6">{area.data.summary}</p>
+  <a href={`/bolgeler/${area.slug}/`} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-500 dark:text-brand-200 dark:hover:text-white">
+    Bolge detayini incele
+    <span aria-hidden="true">→</span>
+  </a>
+</article>

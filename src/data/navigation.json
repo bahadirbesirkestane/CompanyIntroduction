@@ -1,0 +1,39 @@
+{
+  "main": [
+    { "label": "Ana Sayfa", "href": "/" },
+    { "label": "Hizmetler", "href": "/hizmetler/" },
+    { "label": "Galeri", "href": "/galeri/" },
+    { "label": "SSS", "href": "/sss/" },
+    { "label": "Iletisim", "href": "/iletisim/" }
+  ],
+  "footerGroups": [
+    {
+      "title": "Kurumsal",
+      "links": [
+        { "label": "Ana Sayfa", "href": "/" },
+        { "label": "Hakkimizda", "href": "/sayfalar/hakkimizda/" },
+        { "label": "Iletisim", "href": "/iletisim/" }
+      ]
+    },
+    {
+      "title": "Icerikler",
+      "links": [
+        { "label": "Hizmetler", "href": "/hizmetler/" },
+        { "label": "Galeri", "href": "/galeri/" },
+        { "label": "Musteri Yorumlari", "href": "/yorumlar/" },
+        { "label": "Hizmet Bolgeleri", "href": "/bolgeler/" }
+      ]
+    },
+    {
+      "title": "Bilgilendirme",
+      "links": [
+        { "label": "Sik Sorulan Sorular", "href": "/sss/" },
+        { "label": "Hizmet Bolgeleri", "href": "/bolgeler/" }
+      ]
+    }
+  ],
+  "footerBottom": [
+    { "label": "Kurumsal Bilgi", "href": "/sayfalar/hakkimizda/" },
+    { "label": "Iletisim", "href": "/iletisim/" }
+  ]
+}

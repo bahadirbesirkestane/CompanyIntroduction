@@ -1,0 +1,62 @@
+---
+import SiteFooter from "@/components/layout/SiteFooter.astro";
+import SiteHeader from "@/components/layout/SiteHeader.astro";
+import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp.astro";
+import { getSiteSettings } from "@/lib/content/site";
+import { buildBaseSchemas } from "@/lib/seo/schema";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+  structuredData?: Record<string, unknown>[];
+}
+
+const { title, description, canonical, image, noindex = false, structuredData = [] } = Astro.props;
+const schemas = [...buildBaseSchemas({ title, description, canonical }), ...structuredData];
+const site = getSiteSettings();
+---
+
+<!doctype html>
+<html lang="tr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3f7d75" />
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content={site.siteName} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    {canonical && <meta name="twitter:url" content={canonical} />}
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large"} />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = stored ? stored === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
+    </script>
+    {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </head>
+  <body class="min-h-screen">
+    <SiteHeader />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    <FloatingWhatsApp />
+  </body>
+</html>

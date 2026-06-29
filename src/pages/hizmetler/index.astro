@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import ServiceCard from "@/components/cards/ServiceCard.astro";
+import CtaSection from "@/components/sections/CtaSection.astro";
+import { getHomepageContent } from "@/lib/content/site";
+import { buildMeta } from "@/lib/seo/meta";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+const homepage = getHomepageContent();
+const meta = buildMeta({
+  title: "Hizmetler",
+  description: "Tum hizmetler tek bir koleksiyondan listelenir.",
+  canonical: "/hizmetler/"
+});
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-10">
+      <div class="section-shell rounded-[2rem] p-8 sm:p-10">
+        <SectionHeading
+          eyebrow="Koleksiyon"
+          title="Hizmetler"
+          text="Bu sayfa kod degistirmeden yeni hizmet icerikleriyle genisleyebilir."
+        />
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        {services.map((service) => <ServiceCard service={service} headingTag="h2" />)}
+      </div>
+    </Container>
+  </section>
+
+  <CtaSection
+    eyebrow={homepage.cta.eyebrow}
+    title={homepage.cta.title}
+    text={homepage.cta.text}
+    buttonLabel={homepage.cta.buttonLabel}
+    buttonHref={homepage.cta.buttonHref}
+  />
+</BaseLayout>

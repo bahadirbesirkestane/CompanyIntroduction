@@ -1,0 +1,46 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import { buildCollectionSeo } from "@/lib/seo/meta";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { slug: page.slug }
+  }));
+}
+
+const { slug } = Astro.props;
+const page = await getEntry("pages", slug);
+
+if (!page) {
+  throw new Error(`Page not found: ${slug}`);
+}
+
+const meta = buildCollectionSeo(page, { canonicalPath: `/sayfalar/${page.slug}/` });
+const { Content } = await page.render();
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  image={meta.image}
+  noindex={meta.noindex}
+>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-8">
+      <div class="rounded-3xl border border-stone-200 bg-white p-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">Kurumsal Icerik</p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-stone-900">{page.data.title}</h1>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-stone-600">{page.data.summary}</p>
+      </div>
+      <article class="prose max-w-none rounded-2xl border border-stone-200 bg-white p-8 prose-headings:text-stone-900 prose-p:text-stone-700 prose-li:text-stone-700">
+        <Content />
+      </article>
+    </Container>
+  </section>
+</BaseLayout>

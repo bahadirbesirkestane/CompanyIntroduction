@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import GalleryCard from "@/components/cards/GalleryCard.astro";
+import { buildMeta } from "@/lib/seo/meta";
+
+const gallery = (await getCollection("gallery")).sort((a, b) => a.data.order - b.data.order);
+const meta = buildMeta({
+  title: "Galeri",
+  description: "Galeri ogeleri panel uzerinden yonetilir.",
+  canonical: "/galeri/"
+});
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-10">
+      <SectionHeading eyebrow="Galeri" title="Referans Galerisi" text="Gorseller CMS uzerinden yonetilen dosyalardan gelir." />
+      <div class="grid gap-6 md:grid-cols-3">
+        {gallery.map((item) => <GalleryCard item={item} />)}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

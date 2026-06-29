@@ -1,0 +1,38 @@
+---
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+interface BusinessHour {
+  day: string;
+  opens: string;
+  closes: string;
+  isClosed: boolean;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  items: BusinessHour[];
+}
+
+const { eyebrow, title, text, items } = Astro.props;
+---
+
+<section class="py-16 sm:py-20">
+  <Container class="space-y-10">
+    <SectionHeading eyebrow={eyebrow} title={title} text={text} />
+    <div class="surface-card rounded-[1.75rem] p-6">
+      <ul class="divide-y divide-[color:var(--border)]">
+        {items.map((item) => (
+          <li class="flex items-center justify-between gap-4 py-4">
+            <span class="font-medium text-[color:var(--text)]">{item.day}</span>
+            <span class="body-muted text-sm">
+              {item.isClosed ? "Kapali" : `${item.opens} - ${item.closes}`}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  testimonial: CollectionEntry<"testimonials">;
+}
+
+const { testimonial } = Astro.props;
+const ratingDots = Array.from({ length: testimonial.data.rating });
+---
+
+<article class="surface-card rounded-[1.75rem] p-6">
+  <div class="flex gap-1 text-brand-600 dark:text-brand-300" aria-label={`${testimonial.data.rating} uzerinden degerlendirme`}>
+    {ratingDots.map(() => <span class="h-2.5 w-2.5 rounded-full bg-current"></span>)}
+  </div>
+  <p class="mt-4 text-sm leading-7 text-[color:var(--text)]">"{testimonial.data.quote}"</p>
+  <div class="mt-5">
+    <p class="font-semibold text-[color:var(--text)]">{testimonial.data.name}</p>
+    {testimonial.data.location && <p class="body-muted text-sm">{testimonial.data.location}</p>}
+  </div>
+</article>

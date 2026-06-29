@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+import AreaCard from "@/components/cards/AreaCard.astro";
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  items: CollectionEntry<"areas">[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { eyebrow, title, text, items, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="py-16 sm:py-20">
+  <Container class="space-y-10">
+    <SectionHeading eyebrow={eyebrow} title={title} text={text} />
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((area) => <AreaCard area={area} />)}
+    </div>
+    {ctaLabel && ctaHref && (
+      <a href={ctaHref} class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-500 dark:text-brand-200 dark:hover:text-white">
+        {ctaLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </Container>
+</section>

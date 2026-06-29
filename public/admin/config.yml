@@ -1,0 +1,256 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+publish_mode: editorial_workflow
+logo_url: "/uploads/avrupa-yaka-usta-logo.svg"
+locale: "tr"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: "https://companyintroduction.netlify.app"
+display_url: "https://companyintroduction.netlify.app"
+
+collections:
+  - name: "siteSettings"
+    label: "Site Ayarlari"
+    files:
+      - label: "Genel Ayarlar"
+        name: "general"
+        file: "src/data/site-settings.json"
+        fields:
+          - { label: "Site URL", name: "siteUrl", widget: "string" }
+          - { label: "Site Adi", name: "siteName", widget: "string" }
+          - { label: "Slogan", name: "slogan", widget: "string" }
+          - { label: "Logo", name: "logo", widget: "image", required: false }
+          - label: "Iletisim"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Telefon", name: "phone", widget: "string" }
+              - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+              - { label: "E-posta", name: "email", widget: "string" }
+              - { label: "Adres", name: "address", widget: "text" }
+              - { label: "Google Maps", name: "mapEmbedUrl", widget: "string", required: false }
+          - label: "Calisma Saatleri"
+            name: "businessHours"
+            widget: "list"
+            fields:
+              - { label: "Gun", name: "day", widget: "select", options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] }
+              - { label: "Acilis", name: "opens", widget: "string", required: false }
+              - { label: "Kapanis", name: "closes", widget: "string", required: false }
+              - { label: "Kapali", name: "isClosed", widget: "boolean", default: false }
+          - label: "Sosyal Medya"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+          - label: "Varsayilan SEO"
+            name: "defaultSeo"
+            widget: "object"
+            fields:
+              - { label: "Baslik", name: "title", widget: "string" }
+              - { label: "Aciklama", name: "description", widget: "text" }
+              - { label: "OG Gorseli", name: "ogImage", widget: "image", required: false }
+      - label: "Navigasyon"
+        name: "navigation"
+        file: "src/data/navigation.json"
+        fields:
+          - label: "Ust Menu"
+            name: "main"
+            widget: "list"
+            fields:
+              - { label: "Etiket", name: "label", widget: "string" }
+              - { label: "Link", name: "href", widget: "string" }
+          - label: "Footer Gruplari"
+            name: "footerGroups"
+            widget: "list"
+            fields:
+              - { label: "Grup Basligi", name: "title", widget: "string" }
+              - label: "Linkler"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Etiket", name: "label", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+          - label: "Footer Alt Linkleri"
+            name: "footerBottom"
+            widget: "list"
+            fields:
+              - { label: "Etiket", name: "label", widget: "string" }
+              - { label: "Link", name: "href", widget: "string" }
+      - label: "Sosyal Linkler"
+        name: "socialLinks"
+        file: "src/data/social-links.json"
+        fields:
+          - label: "Linkler"
+            name: "links"
+            widget: "list"
+            fields:
+              - { label: "Etiket", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+      - label: "Ana Sayfa"
+        name: "homepage"
+        file: "src/data/homepage.json"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Ust Baslik", name: "eyebrow", widget: "string" }
+              - { label: "Baslik", name: "title", widget: "string" }
+              - { label: "Aciklama", name: "description", widget: "text" }
+              - { label: "Birincil Buton Metni", name: "primaryCtaLabel", widget: "string" }
+              - { label: "Birincil Buton Linki", name: "primaryCtaHref", widget: "string" }
+              - { label: "Ikincil Buton Metni", name: "secondaryCtaLabel", widget: "string" }
+              - { label: "Ikincil Buton Linki", name: "secondaryCtaHref", widget: "string" }
+          - label: "Bolumler"
+            name: "sections"
+            widget: "object"
+            fields:
+              - { label: "Hizmetler Ust Basligi", name: "servicesEyebrow", widget: "string" }
+              - { label: "Hizmetler Basligi", name: "servicesTitle", widget: "string" }
+              - { label: "Hizmetler Metni", name: "servicesText", widget: "text" }
+              - { label: "Hizmetler Buton Metni", name: "servicesCtaLabel", widget: "string" }
+              - { label: "Hizmetler Buton Linki", name: "servicesCtaHref", widget: "string" }
+              - { label: "SSS Ust Basligi", name: "faqEyebrow", widget: "string" }
+              - { label: "SSS Basligi", name: "faqTitle", widget: "string" }
+              - { label: "SSS Metni", name: "faqText", widget: "text" }
+              - { label: "SSS Buton Metni", name: "faqCtaLabel", widget: "string" }
+              - { label: "SSS Buton Linki", name: "faqCtaHref", widget: "string" }
+              - { label: "Bolgeler Ust Basligi", name: "areasEyebrow", widget: "string" }
+              - { label: "Bolgeler Basligi", name: "areasTitle", widget: "string" }
+              - { label: "Bolgeler Metni", name: "areasText", widget: "text" }
+              - { label: "Bolgeler Buton Metni", name: "areasCtaLabel", widget: "string" }
+              - { label: "Bolgeler Buton Linki", name: "areasCtaHref", widget: "string" }
+              - { label: "Yorumlar Ust Basligi", name: "testimonialsEyebrow", widget: "string" }
+              - { label: "Yorumlar Basligi", name: "testimonialsTitle", widget: "string" }
+              - { label: "Yorumlar Metni", name: "testimonialsText", widget: "text" }
+              - { label: "Yorumlar Buton Metni", name: "testimonialsCtaLabel", widget: "string" }
+              - { label: "Yorumlar Buton Linki", name: "testimonialsCtaHref", widget: "string" }
+          - label: "CTA Bolumu"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Ust Baslik", name: "eyebrow", widget: "string" }
+              - { label: "Baslik", name: "title", widget: "string" }
+              - { label: "Metin", name: "text", widget: "text" }
+              - { label: "Buton Metni", name: "buttonLabel", widget: "string" }
+              - { label: "Buton Linki", name: "buttonHref", widget: "string" }
+
+  - name: "services"
+    label: "Hizmetler"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Baslik", name: "title", widget: "string" }
+      - { label: "Ozet", name: "summary", widget: "text" }
+      - { label: "One Cikan", name: "featured", widget: "boolean", default: false }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+      - { label: "Ikon", name: "icon", widget: "string", required: false }
+      - { label: "Hero Gorseli", name: "heroImage", widget: "image", required: false }
+      - { label: "Servis Tipi (Schema)", name: "serviceType", widget: "string", required: false, hint: "Ornek: PlumbingService, RoofingContractor" }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Baslik", name: "title", widget: "string", required: false }
+          - { label: "Aciklama", name: "description", widget: "text", required: false }
+          - { label: "Canonical", name: "canonical", widget: "string", required: false }
+          - { label: "Noindex", name: "noindex", widget: "boolean", default: false }
+      - { label: "Icerik", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Genel Sayfalar"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Baslik", name: "title", widget: "string" }
+      - { label: "Ozet", name: "summary", widget: "text" }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+      - { label: "Sablon", name: "template", widget: "select", options: ["default"], default: "default" }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Baslik", name: "title", widget: "string", required: false }
+          - { label: "Aciklama", name: "description", widget: "text", required: false }
+          - { label: "Canonical", name: "canonical", widget: "string", required: false }
+          - { label: "Noindex", name: "noindex", widget: "boolean", default: false }
+      - { label: "Icerik", name: "body", widget: "markdown" }
+
+  - name: "gallery"
+    label: "Galeri"
+    folder: "src/content/gallery"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Baslik", name: "title", widget: "string" }
+      - { label: "Gorsel", name: "image", widget: "image" }
+      - { label: "Alternatif Metin", name: "alt", widget: "string" }
+      - { label: "Kategori", name: "category", widget: "string", required: false }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+
+  - name: "testimonials"
+    label: "Musteri Yorumlari"
+    folder: "src/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Ad Soyad", name: "name", widget: "string" }
+      - { label: "Konum", name: "location", widget: "string", required: false }
+      - { label: "Puan", name: "rating", widget: "number", default: 5, min: 1, max: 5 }
+      - { label: "Yorum", name: "quote", widget: "text" }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+
+  - name: "faq"
+    label: "Sik Sorulan Sorular"
+    folder: "src/content/faq"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Soru", name: "question", widget: "string" }
+      - { label: "Cevap", name: "answer", widget: "text" }
+      - { label: "Kategori", name: "category", widget: "string", required: false }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+
+  - name: "areas"
+    label: "Hizmet Bolgeleri"
+    folder: "src/content/areas"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Baslik", name: "title", widget: "string" }
+      - { label: "Ozet", name: "summary", widget: "text" }
+      - { label: "Siralama", name: "order", widget: "number", default: 0 }
+      - { label: "Bolge Tipi (Schema)", name: "serviceAreaType", widget: "string", default: "AdministrativeArea", required: false }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Baslik", name: "title", widget: "string", required: false }
+          - { label: "Aciklama", name: "description", widget: "text", required: false }
+          - { label: "Canonical", name: "canonical", widget: "string", required: false }
+          - { label: "Noindex", name: "noindex", widget: "boolean", default: false }
+      - { label: "Icerik", name: "body", widget: "markdown" }

@@ -1,0 +1,32 @@
+{
+  "siteUrl": "https://companyintroduction.netlify.app",
+  "siteName": "Avrupa Yaka Usta Hizmetleri",
+  "slogan": "Gider acma, cati tamiri ve tikaniklik acma hizmetlerinde hizli cozum",
+  "logo": "/uploads/avrupa-yaka-usta-logo.svg",
+  "contact": {
+    "phone": "+90 532 468 12 45",
+    "whatsapp": "+90 532 468 12 45",
+    "email": "bilgi@avrupayakausta.com",
+    "address": "Esenyurt merkezli, Istanbul Avrupa Yakasi geneli hizmet",
+    "mapEmbedUrl": "https://www.google.com/maps?q=Istanbul%20Avrupa%20Yakasi&output=embed"
+  },
+  "businessHours": [
+    { "day": "Monday", "opens": "08:00", "closes": "20:00", "isClosed": false },
+    { "day": "Tuesday", "opens": "08:00", "closes": "20:00", "isClosed": false },
+    { "day": "Wednesday", "opens": "08:00", "closes": "20:00", "isClosed": false },
+    { "day": "Thursday", "opens": "08:00", "closes": "20:00", "isClosed": false },
+    { "day": "Friday", "opens": "08:00", "closes": "20:00", "isClosed": false },
+    { "day": "Saturday", "opens": "09:00", "closes": "18:00", "isClosed": false },
+    { "day": "Sunday", "opens": "", "closes": "", "isClosed": true }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com/avrupayakausta",
+    "instagram": "https://www.instagram.com/avrupayakausta",
+    "youtube": "https://www.youtube.com/@avrupayakausta"
+  },
+  "defaultSeo": {
+    "title": "Avrupa Yaka Usta Hizmetleri",
+    "description": "Istanbul Avrupa Yakasi genelinde gider acma, tikaniklik acma, cati tamiri, oluk temizligi ve petek temizleme hizmetleri.",
+    "ogImage": "/uploads/og-avrupa-yaka-usta.jpg"
+  }
+}

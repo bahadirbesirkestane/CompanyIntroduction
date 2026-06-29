@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import AreasList from "@/components/sections/AreasList.astro";
+import { buildMeta } from "@/lib/seo/meta";
+
+const areas = (await getCollection("areas")).sort((a, b) => a.data.order - b.data.order);
+const meta = buildMeta({
+  title: "Hizmet Bolgeleri",
+  description: "Hizmet verilen bolgeler ve konum bazli sayfa listesi.",
+  canonical: "/bolgeler/"
+});
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <AreasList
+    eyebrow="Bolge Listesi"
+    title="Hizmet Bolgeleri"
+    text="Bolge sayfalari hem kullanici bilgilendirmesi hem de yerel SEO genislemesi icin kullanilabilir."
+    items={areas}
+  />
+</BaseLayout>

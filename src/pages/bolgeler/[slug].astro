@@ -1,0 +1,48 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import { buildCollectionSeo } from "@/lib/seo/meta";
+import { buildAreaPageSchema } from "@/lib/seo/schema";
+
+export async function getStaticPaths() {
+  const areas = await getCollection("areas");
+
+  return areas.map((area) => ({
+    params: { slug: area.slug },
+    props: { slug: area.slug }
+  }));
+}
+
+const { slug } = Astro.props;
+const area = await getEntry("areas", slug);
+
+if (!area) {
+  throw new Error(`Area not found: ${slug}`);
+}
+
+const meta = buildCollectionSeo(area, { canonicalPath: `/bolgeler/${area.slug}/` });
+const { Content } = await area.render();
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  image={meta.image}
+  noindex={meta.noindex}
+  structuredData={meta.canonical ? [buildAreaPageSchema(area, meta.canonical)] : []}
+>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-8">
+      <div class="rounded-3xl border border-stone-200 bg-white p-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">Hizmet Bolgesi</p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-stone-900">{area.data.title}</h1>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-stone-600">{area.data.summary}</p>
+      </div>
+      <article class="prose max-w-none rounded-2xl border border-stone-200 bg-white p-8 prose-headings:text-stone-900 prose-p:text-stone-700">
+        <Content />
+      </article>
+    </Container>
+  </section>
+</BaseLayout>

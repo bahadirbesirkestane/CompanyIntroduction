@@ -1,0 +1,39 @@
+---
+import Container from "@/components/ui/Container.astro";
+import ThemeToggle from "@/components/layout/ThemeToggle.astro";
+import { getPhoneHref, getNavigation, getSiteSettings, getWhatsappHref } from "@/lib/content/site";
+
+const site = getSiteSettings();
+const navigation = getNavigation();
+const phoneHref = getPhoneHref();
+const whatsappHref = getWhatsappHref();
+---
+
+<header class="sticky top-0 z-40 border-b border-white/10 bg-white/80 backdrop-blur-xl dark:bg-slate-950/70">
+  <Container class="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
+    <div class="space-y-1">
+      <a href="/" class="text-lg font-semibold tracking-tight text-stone-900 dark:text-slate-50">{site.siteName}</a>
+      <p class="max-w-md text-sm body-muted">{site.slogan}</p>
+    </div>
+    <div class="flex flex-col gap-3 lg:items-end">
+      <div class="flex flex-wrap items-center gap-3">
+        <a href={phoneHref} class="hidden text-sm font-medium body-muted hover:text-brand-700 dark:hover:text-brand-300 sm:inline-flex">
+          {site.contact.phone}
+        </a>
+        <a href={whatsappHref} class="btn-whatsapp px-4 py-2.5 text-xs sm:text-sm">
+          WhatsApp
+        </a>
+        <ThemeToggle />
+      </div>
+      <nav aria-label="Primary navigation">
+        <ul class="flex flex-wrap items-center gap-4 text-sm text-stone-700 dark:text-slate-200">
+          {navigation.main.map((item) => (
+            <li>
+              <a href={item.href} class="font-medium hover:text-brand-700 dark:hover:text-brand-300">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </Container>
+</header>

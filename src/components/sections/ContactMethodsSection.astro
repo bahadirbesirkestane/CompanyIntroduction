@@ -1,0 +1,41 @@
+---
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+interface ContactItem {
+  label: string;
+  value: string;
+  href?: string;
+  description?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  items: ContactItem[];
+}
+
+const { eyebrow, title, text, items } = Astro.props;
+---
+
+<section class="py-16 sm:py-20">
+  <Container class="space-y-10">
+    <SectionHeading eyebrow={eyebrow} title={title} text={text} />
+    <div class="grid gap-6 md:grid-cols-2">
+      {items.map((item) => (
+        <article class="surface-card rounded-[1.75rem] p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-[color:var(--muted)]">{item.label}</p>
+          {item.href ? (
+            <a href={item.href} class="mt-3 block text-xl font-semibold text-[color:var(--text)] transition hover:text-brand-600 dark:hover:text-brand-200">
+              {item.value}
+            </a>
+          ) : (
+            <p class="mt-3 text-xl font-semibold text-[color:var(--text)]">{item.value}</p>
+          )}
+          {item.description && <p class="body-muted mt-3 text-sm leading-6">{item.description}</p>}
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>

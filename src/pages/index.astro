@@ -1,0 +1,112 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import ServiceCard from "@/components/cards/ServiceCard.astro";
+import FaqList from "@/components/sections/FaqList.astro";
+import AreasList from "@/components/sections/AreasList.astro";
+import CtaSection from "@/components/sections/CtaSection.astro";
+import TestimonialsList from "@/components/sections/TestimonialsList.astro";
+import { getHomepageContent, getWhatsappHref } from "@/lib/content/site";
+import { buildMeta } from "@/lib/seo/meta";
+
+const homepage = getHomepageContent();
+const services = (await getCollection("services"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+const faqItems = (await getCollection("faq")).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+const areas = (await getCollection("areas")).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const testimonials = (await getCollection("testimonials")).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const meta = buildMeta({ canonical: "/" });
+const whatsappHref = getWhatsappHref();
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <section class="relative overflow-hidden border-b border-[color:var(--border)] py-16 sm:py-24">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--hero-glow),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.58),transparent_72%)] dark:bg-[radial-gradient(circle_at_top_left,var(--hero-glow),transparent_42%),linear-gradient(180deg,rgba(15,23,42,0.22),transparent_72%)]"></div>
+    <Container class="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-center">
+      <div class="space-y-6">
+        <p class="eyebrow-label">{homepage.hero.eyebrow}</p>
+        <h1 class="max-w-4xl text-4xl font-bold tracking-tight text-[color:var(--text)] sm:text-5xl lg:text-6xl">{homepage.hero.title}</h1>
+        <p class="max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{homepage.hero.description}</p>
+        <div class="flex flex-wrap gap-4">
+          <a href={whatsappHref} class="btn-whatsapp">
+            WhatsApp ile Hemen Ulasin
+          </a>
+          <a href={homepage.hero.primaryCtaHref} class="btn-primary">
+          {homepage.hero.primaryCtaLabel}
+          </a>
+          <a href={homepage.hero.secondaryCtaHref} class="btn-secondary">
+            {homepage.hero.secondaryCtaLabel}
+          </a>
+        </div>
+      </div>
+      <div class="surface-card-strong rounded-[2rem] p-6 sm:p-7">
+        <p class="eyebrow-label">Hizli Iletisim</p>
+        <h2 class="mt-3 text-2xl font-semibold text-[color:var(--text)]">Acil ihtiyaclar icin en hizli kanal WhatsApp</h2>
+        <p class="body-muted mt-3 text-sm leading-6">
+          Konum, fotograf ve kisa aciklamayi tek mesajda ileterek daha hizli geri donus alabilirsiniz.
+        </p>
+        <a href={whatsappHref} class="btn-whatsapp mt-6 w-full justify-center">
+          Mesaj Gonder
+        </a>
+        <div class="mt-6 soft-grid rounded-[1.5rem] p-4 text-sm text-[color:var(--muted)]">
+          Telefon, hizmet detaylari ve sayfa icerikleri panelden degistirilebilir yapida korunmustur.
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-10">
+      <SectionHeading
+        eyebrow={homepage.sections.servicesEyebrow}
+        title={homepage.sections.servicesTitle}
+        text={homepage.sections.servicesText}
+      />
+      <div class="grid gap-6 md:grid-cols-3">
+        {services.map((service) => <ServiceCard service={service} />)}
+      </div>
+      <a href={homepage.sections.servicesCtaHref} class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-500 dark:text-brand-200 dark:hover:text-white">
+        {homepage.sections.servicesCtaLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    </Container>
+  </section>
+
+  <FaqList
+    eyebrow={homepage.sections.faqEyebrow}
+    title={homepage.sections.faqTitle}
+    text={homepage.sections.faqText}
+    items={faqItems}
+    ctaLabel={homepage.sections.faqCtaLabel}
+    ctaHref={homepage.sections.faqCtaHref}
+  />
+
+  <AreasList
+    eyebrow={homepage.sections.areasEyebrow}
+    title={homepage.sections.areasTitle}
+    text={homepage.sections.areasText}
+    items={areas}
+    ctaLabel={homepage.sections.areasCtaLabel}
+    ctaHref={homepage.sections.areasCtaHref}
+  />
+
+  <TestimonialsList
+    eyebrow={homepage.sections.testimonialsEyebrow}
+    title={homepage.sections.testimonialsTitle}
+    text={homepage.sections.testimonialsText}
+    items={testimonials}
+    ctaLabel={homepage.sections.testimonialsCtaLabel}
+    ctaHref={homepage.sections.testimonialsCtaHref}
+  />
+
+  <CtaSection
+    eyebrow={homepage.cta.eyebrow}
+    title={homepage.cta.title}
+    text={homepage.cta.text}
+    buttonLabel={homepage.cta.buttonLabel}
+    buttonHref={homepage.cta.buttonHref}
+  />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import Container from "@/components/ui/Container.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text?: string;
+  embedUrl?: string;
+}
+
+const { eyebrow, title, text, embedUrl } = Astro.props;
+---
+
+<section class="py-16 sm:py-20">
+  <Container class="space-y-10">
+    <SectionHeading eyebrow={eyebrow} title={title} text={text} />
+    <div class="surface-card overflow-hidden rounded-[2rem] p-0">
+      {embedUrl ? (
+        <iframe
+          src={embedUrl}
+          title={title}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="h-[360px] w-full border-0"
+          allowfullscreen
+        />
+      ) : (
+        <div class="flex h-[260px] items-center justify-center bg-[color:var(--surface-strong)] p-6 text-center text-sm text-[color:var(--muted)]">
+          Google Maps baglantisi tanimlandiginda bu alanda konum gorsellestirilir.
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

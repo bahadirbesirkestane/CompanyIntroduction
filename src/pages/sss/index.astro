@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FaqList from "@/components/sections/FaqList.astro";
+import { buildMeta } from "@/lib/seo/meta";
+
+const faqItems = (await getCollection("faq")).sort((a, b) => a.data.order - b.data.order);
+const meta = buildMeta({
+  title: "Sik Sorulan Sorular",
+  description: "Sik sorulan sorular ve hizmet sureciyle ilgili temel bilgiler.",
+  canonical: "/sss/"
+});
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <FaqList
+    eyebrow="Bilgilendirme"
+    title="Sik Sorulan Sorular"
+    text="Bu sayfa icerik ekibi tarafindan panelden guncellenebilir genel soru havuzunu listeler."
+    items={faqItems}
+  />
+</BaseLayout>

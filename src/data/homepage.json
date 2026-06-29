@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "eyebrow": "Istanbul Avrupa Yakasi Geneli",
+    "title": "Gider acma, cati tamiri ve acil usta hizmetlerinde hizli destek",
+    "description": "Lavabo ve mutfak giderlerinden cati kacagina kadar, ayni gun icinde yonlendirme yapilan pratik ve guven veren usta hizmeti.",
+    "primaryCtaLabel": "Hemen Hizmet Al",
+    "primaryCtaHref": "/hizmetler/",
+    "secondaryCtaLabel": "WhatsApp ile Yaz",
+    "secondaryCtaHref": "/iletisim/"
+  },
+  "sections": {
+    "servicesEyebrow": "Hizmetler",
+    "servicesTitle": "En cok talep edilen hizmetler",
+    "servicesText": "Ev, is yeri ve apartman yonetimleri icin sik cagrilan teknik hizmetler tek merkezden yonetilir.",
+    "servicesCtaLabel": "Tum Hizmetleri Gor",
+    "servicesCtaHref": "/hizmetler/",
+    "faqEyebrow": "SSS",
+    "faqTitle": "Sik Sorulan Sorular",
+    "faqText": "Ucretlendirme, ulasim suresi ve hizmet kapsamiyla ilgili temel sorulari burada topladik.",
+    "faqCtaLabel": "Tum Sorulari Gor",
+    "faqCtaHref": "/sss/",
+    "areasEyebrow": "Hizmet Bolgeleri",
+    "areasTitle": "Hangi bolgelere hizmet veriliyor?",
+    "areasText": "Istanbul Avrupa Yakasi genelindeki ilce ve mahallelere planli ya da acil yonlendirme yapilir.",
+    "areasCtaLabel": "Tum Bolgeleri Gor",
+    "areasCtaHref": "/bolgeler/",
+    "testimonialsEyebrow": "Yorumlar",
+    "testimonialsTitle": "Musteri memnuniyeti odakli hizmet",
+    "testimonialsText": "Hizmet sonrasi geri bildirimler, hiz ve iletisim kalitesini en net gosteren referanslardir.",
+    "testimonialsCtaLabel": "Tum Yorumlari Gor",
+    "testimonialsCtaHref": "/yorumlar/"
+  },
+  "cta": {
+    "eyebrow": "Acil Destek",
+    "title": "Tikaniklik, sizinti veya cati problemi icin hemen iletisime gecin",
+    "text": "WhatsApp uzerinden konum ve fotograf gondererek daha hizli yonlendirme alabilir, acil durumlarda dogrudan telefonla ulasabilirsiniz.",
+    "buttonLabel": "Iletisim Sayfasina Git",
+    "buttonHref": "/iletisim/"
+  }
+}

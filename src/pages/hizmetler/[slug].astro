@@ -1,0 +1,48 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import { buildCollectionSeo } from "@/lib/seo/meta";
+import { buildServicePageSchema } from "@/lib/seo/schema";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { slug: service.slug }
+  }));
+}
+
+const { slug } = Astro.props;
+const service = await getEntry("services", slug);
+
+if (!service) {
+  throw new Error(`Service not found: ${slug}`);
+}
+
+const meta = buildCollectionSeo(service, { canonicalPath: `/hizmetler/${service.slug}/` });
+const { Content } = await service.render();
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  image={meta.image}
+  noindex={meta.noindex}
+  structuredData={meta.canonical ? [buildServicePageSchema(service, meta.canonical)] : []}
+>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-8">
+      <div class="section-shell rounded-[2rem] p-8 sm:p-10">
+        <p class="eyebrow-label">Hizmet Detayi</p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-[color:var(--text)]">{service.data.title}</h1>
+        <p class="mt-4 max-w-2xl text-lg leading-8 text-[color:var(--muted)]">{service.data.summary}</p>
+      </div>
+      <article class="surface-card prose prose-stone max-w-none rounded-[1.75rem] p-8 prose-headings:text-[color:var(--text)] prose-p:text-[color:var(--muted)] prose-strong:text-[color:var(--text)] prose-li:text-[color:var(--muted)] prose-a:text-brand-600 dark:prose-invert dark:prose-a:text-brand-200">
+        <Content />
+      </article>
+    </Container>
+  </section>
+</BaseLayout>

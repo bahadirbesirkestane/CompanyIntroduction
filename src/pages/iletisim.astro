@@ -1,0 +1,97 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/ui/Container.astro";
+import ContactCtaSection from "@/components/sections/ContactCtaSection.astro";
+import ContactMethodsSection from "@/components/sections/ContactMethodsSection.astro";
+import BusinessHoursSection from "@/components/sections/BusinessHoursSection.astro";
+import MapSection from "@/components/sections/MapSection.astro";
+import { getPhoneHref, getSiteSettings, getWhatsappHref } from "@/lib/content/site";
+import { buildMeta } from "@/lib/seo/meta";
+import { buildContactPageSchema } from "@/lib/seo/schema";
+
+const site = getSiteSettings();
+const phoneHref = getPhoneHref();
+const whatsappHref = getWhatsappHref();
+const meta = buildMeta({
+  title: "Iletisim",
+  description: "Telefon, WhatsApp ve e-posta ile hizli iletisim kurabileceginiz iletisim sayfasi.",
+  canonical: "/iletisim/"
+});
+const contactItems = [
+  {
+    label: "Telefon",
+    value: site.contact.phone,
+    href: phoneHref,
+    description: "Hizli gorusme ve kesif talepleri icin dogrudan arayabilirsiniz."
+  },
+  {
+    label: "WhatsApp",
+    value: site.contact.whatsapp,
+    href: whatsappHref,
+    description: "Konum, fotograf veya ihtiyac detaylarini hizli iletmek icin idealdir."
+  },
+  {
+    label: "E-posta",
+    value: site.contact.email,
+    href: `mailto:${site.contact.email}`,
+    description: "Teklif, is birligi veya detayli bilgi talepleri icin kullanilabilir."
+  },
+  {
+    label: "Adres",
+    value: site.contact.address,
+    description: "Hizmet planlamasi ve referans bolge bilgisi icin kayitli iletisim adresi."
+  }
+];
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  canonical={meta.canonical}
+  image={meta.image}
+  structuredData={[buildContactPageSchema()]}
+>
+  <section class="py-16 sm:py-20">
+    <Container class="space-y-8">
+      <div class="section-shell space-y-3 rounded-[2rem] p-8 sm:p-10">
+        <p class="eyebrow-label">Iletisim</p>
+        <h1 class="text-4xl font-bold tracking-tight text-[color:var(--text)]">Bize Ulasin</h1>
+        <p class="max-w-2xl text-[color:var(--muted)]">
+          Telefon, WhatsApp ve e-posta kanallari tekil ayarlar uzerinden yonetilir. Bu sayfa tekrar kullanilabilir
+          iletisim aksiyonlari icin temel sablon gorevi gorur.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <ContactCtaSection
+    eyebrow="Hizli Donus"
+    title="En hizli kanal uzerinden bize ulasin"
+    text="Acil durumlarda telefonla, detayli konularda ise WhatsApp uzerinden iletisim kurmak genellikle en hizli sonucu verir."
+    primaryLabel="WhatsApp ile Yaz"
+    primaryHref={whatsappHref}
+    secondaryLabel="Hemen Ara"
+    secondaryHref={phoneHref}
+  />
+
+  <ContactMethodsSection
+    eyebrow="Iletisim Kanallari"
+    title="Tum iletisim bilgileri"
+    text="Asagidaki alanlar panel uzerinden yonetilir ve farkli lokal hizmet saglayicilarina uyarlanabilir."
+    items={contactItems}
+  />
+
+  <BusinessHoursSection
+    eyebrow="Calisma Saatleri"
+    title="Hangi saatlerde ulasabilirsiniz?"
+    text="Calisma saatleri panel uzerinden guncellenir ve yerel hizmet akisina gore duzenlenebilir."
+    items={site.businessHours}
+  />
+
+  <MapSection
+    eyebrow="Konum"
+    title="Hizmet ve ulasim bolgesi"
+    text="Google Maps baglantisi tanimlandiginda kullanicilar konum ve hizmet alanini daha rahat inceleyebilir."
+    embedUrl={site.contact.mapEmbedUrl}
+  />
+</BaseLayout>

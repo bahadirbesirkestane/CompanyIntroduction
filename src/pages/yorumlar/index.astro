@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TestimonialsList from "@/components/sections/TestimonialsList.astro";
+import { buildMeta } from "@/lib/seo/meta";
+
+const testimonials = (await getCollection("testimonials")).sort((a, b) => a.data.order - b.data.order);
+const meta = buildMeta({
+  title: "Musteri Yorumlari",
+  description: "Musteri yorumlari ve referans icerikleri.",
+  canonical: "/yorumlar/"
+});
+---
+
+<BaseLayout title={meta.title} description={meta.description} canonical={meta.canonical} image={meta.image}>
+  <TestimonialsList
+    eyebrow="Guven"
+    title="Musteri Yorumlari"
+    text="Yorumlar tek bir koleksiyondan yonetilir ve farkli sektorlerde ayni yapiyla tekrar kullanilabilir."
+    items={testimonials}
+  />
+</BaseLayout>

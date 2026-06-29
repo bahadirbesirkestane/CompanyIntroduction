@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  service: CollectionEntry<"services">;
+  headingTag?: "h2" | "h3";
+}
+
+const { service, headingTag = "h3" } = Astro.props;
+const HeadingTag = headingTag;
+---
+
+<article class="surface-card group rounded-[1.75rem] p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_24px_60px_rgba(15,23,42,0.14)]">
+  <div class="mb-4 inline-flex rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-brand-200">
+    Hizmet
+  </div>
+  <HeadingTag class="text-xl font-semibold text-[color:var(--text)]">{service.data.title}</HeadingTag>
+  <p class="body-muted mt-3 text-sm leading-6">{service.data.summary}</p>
+  <a href={`/hizmetler/${service.slug}/`} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-500 dark:text-brand-200 dark:hover:text-white">
+    Detaylari incele
+    <span aria-hidden="true">→</span>
+  </a>
+</article>

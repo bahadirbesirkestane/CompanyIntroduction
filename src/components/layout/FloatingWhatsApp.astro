@@ -1,0 +1,14 @@
+---
+import { getWhatsappHref } from "@/lib/content/site";
+
+const whatsappHref = getWhatsappHref();
+---
+
+<a
+  href={whatsappHref}
+  class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-[0_18px_45px_-18px_rgba(16,185,129,0.9)] transition hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 md:bottom-8 md:right-8"
+  aria-label="WhatsApp ile iletisime gec"
+>
+  <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-base">W</span>
+  <span class="hidden sm:inline">WhatsApp ile Yaz</span>
+</a>
